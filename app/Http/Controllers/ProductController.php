@@ -38,6 +38,7 @@ class ProductController extends Controller
     public function edit($id)
     {   
         //parameter id digunakan untuk menentukan product mana yang akan di edit
+        //findorfail constrait with where but where is use for filter and findorfail use for search one data
         $product = Product::findOrFail($id);
 
         return view('edit', compact('product'));
@@ -56,6 +57,7 @@ class ProductController extends Controller
 
     public function delete($id)
     {
+        //destroy digunakan untuk mendelete product yang dipilih
         Product::destroy($id);
         return back();
     }

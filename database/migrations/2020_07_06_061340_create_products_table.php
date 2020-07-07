@@ -15,6 +15,8 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('category_id')->unsigned(); //harus memankai big integer
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->string('product_name');
             $table->integer('price');
             $table->integer('stock');
