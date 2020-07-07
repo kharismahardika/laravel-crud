@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Our Products</title>
     <link rel="stylesheet" href="{{asset('style/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('style/style.css')}}">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -38,26 +37,23 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Django</td>
-                    <td>Rp2000</td>
-                    <td>20</td>
-                    <td>
-                        <a href="" class="btn btn-success">Edit</a>
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Django</td>
-                    <td>Rp2000</td>
-                    <td>20</td>
-                    <td>
-                        <a href="" class="btn btn-success">Edit</a>
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </td>
-                </tr>
+              <!-- read pada blade-->
+                @foreach ($products as $product)
+                    <tr>
+                      <td>{{ $loop->iteration }}</td>
+                      <td>{{ $product->product_name }}</td>
+                      <td>{{ $product->price }}</td>
+                      <td>{{ $product->stock }}</td>
+                      <td>
+                        <a href="/edit/{{ $product->id }}" class="btn btn-success">Edit</a>
+                        <form action="/delete/{{ $product->id }}" method="POST">
+                          @csrf
+                          @method('DELETE')
+                          <button type="submit" class="btn btn-danger">delete</button>
+                        </form>
+                      </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>  

@@ -26,6 +26,7 @@
       </nav>
     <div class="container mt-5" style="width: 33%;">
         <form class="mb-4" method="POST" action="/store">
+          <!-- csrf di gunakan untuk sekuritas dan wajib ada di bawah tag form -->
           @csrf
             <h1 class="text-center mb-4">Create Product</h1>
             <div class="form-group">
@@ -40,6 +41,7 @@
                 <label for="">Stock</label>
                 <input type="number" class="form-control" name="stock">
             </div>
+            <!-- dan button harus di jadikan submit -->
             <button type="submit" id="btn-submit" class="btn btn-primary mt-3">Submit</button>
         </form>
     </div>

@@ -25,19 +25,21 @@
         </div>
       </nav>
     <div class="container mt-5" style="width: 33%;">
-        <form class="mb-4">
+        <form class="mb-4" action="/update/{{ $product->id }}" method="POST">
+            @csrf
+            @method('PATCH')
             <h1 class="text-center mb-4">Edit Product</h1>
             <div class="form-group">
                 <label for="">Product Name</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" value="{{ $product->product_name }}" name="product_name">
             </div>
             <div class="form-group">
                 <label for="">Price</label>
-                <input type="number" class="form-control">
+                <input type="number" class="form-control" value="{{ $product->price }}" name="price">
             </div>
             <div class="form-group">
                 <label for="">Stock</label>
-                <input type="number" class="form-control">
+                <input type="number" class="form-control" value="{{ $product->stock }}" name="stock">
             </div>
             <button type="submit" id="btn-submit" class="btn btn-primary mt-3">Submit</button>
         </form>

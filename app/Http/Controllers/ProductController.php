@@ -14,22 +14,49 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        //menginput product ke database
         Product::create([
             'product_name' => $request->product_name,
             'price' => $request->price,
             'stock' => $request->stock
         ]);
-
-        return back();
+        
+        //me return ke halaman yang sama
+        return redirect('products');
     }
 
     public function viewProducts()
-    {
-        return view('products');
+    {   
+        //all berfungsi untuk mengambil semua data yang ada di table product
+        $products = Product::all();
+
+    
+        //compact berfungsi untuk melempar variable dan isinya ke view
+        return view('products', compact('products'));
     }
 
-    public function edit()
+    public function edit($id)
+    {   
+        //parameter id digunakan untuk menentukan product mana yang akan di edit
+        $product = Product::findOrFail($id);
+
+        return view('edit', compact('product'));
+    }
+
+    public function update(Request $request, $id)
     {
-        return view('edit');
+        Product::where('id', $id)->update([
+            'product_name' => $request->product_name,
+            'price' => $request->price,
+            'stock' => $request->stock
+        ]);
+
+        return redirect('products');
+    }
+
+    public function delete($id)
+    {
+        Product::destroy($id);
+        return back();
     }
 }
